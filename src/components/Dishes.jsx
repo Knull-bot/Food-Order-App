@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import DishItem from "./DishItem.jsx";
 export default function Dishes() {
   const [dishesData, setDishesData] = useState();
   useEffect(() => {
@@ -19,7 +20,14 @@ export default function Dishes() {
   ) : (
     <ul id="meals">
       {dishesData.map((dish) => (
-        <li key={dish.id}>{dish.name}</li>
+        <DishItem
+          key={dish.id}
+          id={dish.id}
+          description={dish.description}
+          image={dish.image}
+          name={dish.name}
+          price={dish.price}
+        />
       ))}
     </ul>
   );
