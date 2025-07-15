@@ -1,3 +1,4 @@
+import Button from "../components/UI/Button.jsx";
 export default function DishItem({ id, description, image, name, price }) {
   return (
     <li className="meal-item" key={id}>
@@ -15,7 +16,7 @@ export default function DishItem({ id, description, image, name, price }) {
         </div>
 
         <p className="meal-item-actions">
-          <button>Add to cart</button>
+          <Button>Add to cart</Button>
         </p>
       </article>
     </li>
