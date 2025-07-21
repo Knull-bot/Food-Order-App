@@ -53,5 +53,6 @@ export function CartContextProvider({children}) {
         addItem,
         removeItem
     }
+
     return <CartContext value={cartContext}>{children}</CartContext>;
 }

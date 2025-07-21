@@ -1,6 +1,6 @@
 import Button from "../components/UI/Button.jsx";
 import { useContext } from "react";
-import { CartContext } from "../../store/CartContext.jsx";
+import { CartContext } from "../store/CartContext.jsx";
 /**
  * A component to display a dish item in the menu.
  * It displays a photo of the dish, the name, the price, a description and an "Add to cart" button.
@@ -8,6 +8,10 @@ import { CartContext } from "../../store/CartContext.jsx";
  */
 export default function DishItem({ id, description, image, name, price }) {
   const { addItem } = useContext(CartContext);
+
+  function handleAddDishToCart(id, name, price) {
+    addItem({ id, name, price });
+  }
   return (
     <li className="meal-item" key={id}>
       <article>
@@ -24,7 +28,7 @@ export default function DishItem({ id, description, image, name, price }) {
         </div>
 
         <p className="meal-item-actions">
-          <Button onClick={() => addItem({ id, name, price})}>Add to cart</Button>
+          <Button onClick={() =>handleAddDishToCart(id, name, price)}>Add to cart</Button>
         </p>
       </article>
     </li>
