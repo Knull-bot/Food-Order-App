@@ -1,5 +1,7 @@
 import logo from "../assets/logo.jpg";
 import Button from "./UI/Button.jsx";
+import { useContext } from "react";
+import { CartContext } from "../../store/CartContext.jsx";
 
 /**
  * The Header component is responsible for rendering the main header of the
@@ -7,6 +9,7 @@ import Button from "./UI/Button.jsx";
  *
  */
 export default function Header() {
+  const { items } = useContext(CartContext);
   return (
     <header id="main-header">
       <div id="title">
@@ -14,7 +17,7 @@ export default function Header() {
         <h1>ReactFood</h1>
       </div>
       <nav>
-        <Button textOnly={true}>Cart (0)</Button>
+        <Button textOnly={true}>Cart ({items.length})</Button>
       </nav>
     </header>
   );
