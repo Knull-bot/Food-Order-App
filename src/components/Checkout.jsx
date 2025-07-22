@@ -13,6 +13,18 @@ export default function Checkout() {
     event.preventDefault();
     const fd = new FormData(event.target);
     const data = Object.fromEntries(fd.entries());
+    fetch("http://localhost:3000/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        order: {
+          items: cartCtx.items,
+          customer: data,
+        },
+      }),
+    });
     console.log(data);
   }
 
@@ -38,7 +50,7 @@ export default function Checkout() {
             )
           )}
         </p>
-        <Input label="Full Name" type="text" id="full-name"></Input>
+        <Input label="Full Name" type="text" id="name"></Input>
         <Input label="E-mail adress" type="email" id="email"></Input>
         <Input label="Street" type="text" id="street"></Input>
         <div className="control-row">
