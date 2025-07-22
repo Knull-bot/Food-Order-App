@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import DishItem from "./DishItem.jsx";
+import useHttp from "../hooks/useHttp.jsx";
 /**
  * A component that fetches the list of dishes from the backend and renders them as DishItem components.
  *
@@ -7,30 +7,15 @@ import DishItem from "./DishItem.jsx";
  *
 
  */
-export default function Dishes() {
-  const [dishesData, setDishesData] = useState();
-  useEffect(() => {
-    /**
-     * Fetches the list of dishes from the backend API.
-     *
-     * Makes a GET request to the "/meals" endpoint to retrieve the available dishes.
-     * On success, updates the state with the fetched data.
-     * Logs an error message to the console if the request fails.
-     */
 
-    async function fetchDishes() {
-      try {
-        const response = await fetch("http://localhost:3000/meals");
-        const dishes = await response.json();
-        console.log(dishes);
-        setDishesData(dishes);
-      } catch (error) {
-        console.log("Error: ", error);
-      }
-    }
-    fetchDishes();
-  }, []);
-  return !dishesData ? (
+const requestConfig = {};
+export default function Dishes() {
+  const {
+    isFetching,
+    error,
+    fetchedData: dishesData,
+  } = useHttp("http://localhost:3000/meals", requestConfig, []);
+  return isFetching ? (
     <p>"Loading..."</p>
   ) : (
     <ul id="meals">

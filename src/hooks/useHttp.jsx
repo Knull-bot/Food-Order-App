@@ -9,10 +9,10 @@ async function sendHttpRequest(url, config) {
   return data;
 }
 
-export default function useHtpp(url, config) {
+export default function useHttp(url, config, initialValue) {
   const [isFetching, setIsFetching] = useState(false);
   const [error, setError] = useState();
-  const [fetchedData, setFetchedData] = useState();
+  const [fetchedData, setFetchedData] = useState(initialValue);
 
   const sendRequest = useCallback(
     async function sendRequest() {
@@ -29,7 +29,7 @@ export default function useHtpp(url, config) {
   );
 
   useEffect(() => {
-    if (config && config.method === "GET") {
+    if ((config && (config.method === "GET" || !config.method)) || !config) {
       sendRequest();
     }
   }, [sendRequest, config]);
